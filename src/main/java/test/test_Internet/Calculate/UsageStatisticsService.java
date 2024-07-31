@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsService;
+import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsService;
 import test.test_Internet.UsageData.UsageDataEntity;
 import test.test_Internet.UsageData.UsageDataRepository;
 
@@ -19,6 +21,12 @@ public class UsageStatisticsService {
 
     @Autowired
     private UsageStatisticsRepository usageStatisticsRepository;
+
+    @Autowired
+    private DailyAverageUsageStatisticsService dailyAverageUsageStatisticsService;
+
+    @Autowired
+    private MonthlyAverageUsageStatisticsService monthlyAverageUsageStatisticsService;
 
     public void updateUsageStatistics(String email) {
         double totalUsageTime = calculateTotalUsageTime(email);
@@ -46,6 +54,10 @@ public class UsageStatisticsService {
 
             usageStatisticsRepository.save(newEntity);
         }
+
+        // 일별, 월별 평균 사용 시간 계산 후 저장
+        dailyAverageUsageStatisticsService.calculateAndSaveDailyAverageUsage();
+        monthlyAverageUsageStatisticsService.calculateAndSaveMonthlyAverageUsage();
     }
 
     public UsageStatisticsDTO calculateStatistics() {
