@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IfU</title>
+    <link rel="stylesheet" href="/static/web/styles/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <img src="/static/web/img/logo.png" alt="Logo" class="logo">
+        <div class="header-buttons">
+            <button onclick="location.href='/logout'">Logout</button>
+            <button>Download</button>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <div class="hero-text">
+            <h2>당신의 인터넷 사용시간은?</h2>
+            <h3 id="totalMinutes">123123123</h3>
+        </div>
+        <div class="hero-image">
+            <img src="/static/web/img/image.png" alt="Laptop and Clock">
+        </div>
+    </section>
+    <section class="stats">
+        <div class="stat-card">
+            <p>2024 최저시급 기준</p>
+            <h4>123123</h4>
+        </div>
+        <div class="stat-card">
+            <p> 책 </p>
+            <h4>125</h4>
+        </div>
+        <div class="stat-card">
+            <p>명상</p>
+            <h4>1,123</h4>
+        </div>
+        <div class="stat-card">
+            <p>최기시간 걸음</p>
+            <h4>12,345,123</h4>
+        </div>
+        <div class="stat-card">
+            <p>책 읽기</p>
+            <h4>125</h4>
+        </div>
+        <div class="stat-card">
+            <p>명상</p>
+            <h4>1,123</h4>
+        </div>
+    </section>
+    <section class="screen-time-container">
+        <h2>Screen Time</h2>
+        <div class="donut-container">
+            <div class="donut-box">
+                <div class="donut" id="donutChart1" data-percent="0"></div>
+            </div>
+            <div class="donut-box">
+                <div class="donut" id="donutChart2" data-percent="0"></div>
+            </div>
+            <div class="donut-box">
+                <div class="donut" id="donutChart3" data-percent="0"></div>
+            </div>
+        </div>
+    </section>
+    <section class="health">
+        <h2>건강 알림 신호</h2>
+        <div class="health-card">스트레칭 <span>횟수</span></div>
+        <div class="health-card">팔 마사지 <span>횟수</span></div>
+        <div class="health-card">스트레칭 <span>횟수</span></div>
+    </section>
+    <section class="comparison">
+        <h2>비교해보기</h2>
+        <div class="comparison-row">
+            <div class="comparison-card"></div>
+            <div class="comparison-card"></div>
+            <div class="comparison-card"></div>
+            <div class="comparison-card"></div>
+        </div>
+    </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/web/js/scripts.js"></script>
+</body>
+</html>
