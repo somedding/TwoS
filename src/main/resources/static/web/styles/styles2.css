@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #8950c3; /* 보라색 배경 */
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #59387b; /* 카드의 어두운 보라색 */
+    padding: 20px;
+    border-radius: 15px;
+    width: 150px;
+    text-align: center;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #AAA; /* 아바타를 위한 회색 원 */
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.add-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #59387b;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.add-card:before {
+    content: '+';
+    font-size: 2em;
+}
