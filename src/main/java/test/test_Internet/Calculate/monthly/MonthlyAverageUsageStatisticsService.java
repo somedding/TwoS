@@ -2,6 +2,7 @@ package test.test_Internet.Calculate.monthly;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import test.test_Internet.Calculate.UsageStatisticsRepository;
 
 import java.time.Month;
@@ -19,6 +20,7 @@ public class MonthlyAverageUsageStatisticsService {
     @Autowired
     private UsageStatisticsRepository usageStatisticsRepository;
 
+    @Transactional
     public void calculateAndSaveMonthlyAverageUsage() {
         List<Object[]> monthlyUsageList = usageStatisticsRepository.findMonthlyStatistics();
 

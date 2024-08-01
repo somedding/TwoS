@@ -15,6 +15,9 @@ public class MonthlyAverageUsageStatisticsEntity {
     private Long id;
 
     @Convert(converter = YearMonthAttributeconverter.class)
+    @Column(name = "ym")
     private YearMonth yearMonth;
+
+    @Column(name = "average_usage_time", columnDefinition = "DOUBLE")
     private Double averageUsageTime;
 }

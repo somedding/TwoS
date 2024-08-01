@@ -1,9 +1,6 @@
 package test.test_Internet.Calculate.daliy;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +15,7 @@ public class DailyAverageUsageStatisticsEntity {
     private Long id;
 
     private LocalDate date;
+
+    @Column(name = "average_usage_time", columnDefinition = "DOUBLE")
     private Double averageUsageTime;
 }
