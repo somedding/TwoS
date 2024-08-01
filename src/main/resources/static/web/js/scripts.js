@@ -1,6 +1,6 @@
 // 데이터를 가져오는 함수
 async function fetchData() {
-    const response = await fetch('/static/data.json'); // 데이터가 저장된 파일 또는 API URL
+    const response = await fetch('/src/main/resources/static/data.json'); // 데이터가 저장된 파일 또는 API URL
     const data = await response.json();
     return data;
 }
