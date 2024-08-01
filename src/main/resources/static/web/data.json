@@ -1,0 +1,7 @@
+{
+    "labels": ["January", "February", "March", "April", "May", "June"],
+    "values": [10, 20, 30, 40, 50, 60],
+    "percent1": 72,
+    "percent2": 85,
+    "percent3": 65
+}
