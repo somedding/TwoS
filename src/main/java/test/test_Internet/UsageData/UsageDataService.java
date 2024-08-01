@@ -39,6 +39,7 @@ public class UsageDataService {
         }
 
         Map<String, Double> usageData = usageDataDTO.getUsageData();
+        LocalDate today = LocalDate.now();
 
         // 스크린 타임 데이터를 위한 변수 초기화
         Map<String, Double> screenTimeData = new HashMap<>();
@@ -47,14 +48,22 @@ public class UsageDataService {
             String domain = entry.getKey();
             double duration = entry.getValue();
 
-            UsageDataEntity existingEntity = usageDataRepository.findByEmailAndDomain(email, domain);
+            UsageDataEntity existingEntity = usageDataRepository.findByEmailAndDomainAndCreatedAt(email, domain, today);
 
+            // 받아온 정보 중 email, domain, today 에 해당하는 데이터가
+            // 이미 존재 할 경우에는 갱신하고 존재하지 않을 경우에는 생성
             if (existingEntity != null) {
                 existingEntity.setDuration(duration);
                 existingEntity.setUpdatedAt(LocalDateTime.now());
                 usageDataRepository.save(existingEntity);
             } else {
-                usageDataRepository.save(new UsageDataEntity(email, domain, duration));
+                UsageDataEntity newEntity = new UsageDataEntity();
+                newEntity.setEmail(email);
+                newEntity.setDomain(domain);
+                newEntity.setDuration(duration);
+                newEntity.setUpdatedAt(LocalDateTime.now());
+                newEntity.setCreatedAt(today);
+                usageDataRepository.save(newEntity);
             }
 
             // ScreenTimeService의 classifyDomain 메서드를 호출하여 도메인 카테고리 분류

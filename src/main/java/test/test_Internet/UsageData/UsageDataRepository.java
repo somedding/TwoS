@@ -5,13 +5,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface UsageDataRepository extends JpaRepository<UsageDataEntity, Long> {
 
     List<UsageDataEntity> findByEmail(String email); // 사용자 ID로 사용 데이터 조회
-    UsageDataEntity findByEmailAndDomain(String email, String domain); // email과 domain으로 사용 데이터 조회
+//    UsageDataEntity findByEmailAndDomain(String email, String domain); // email과 domain으로 사용 데이터 조회
+    UsageDataEntity findByEmailAndDomainAndCreatedAt(String domain, String email, LocalDate createdAt); // email, domain, createdAt으로 사용 데이터 조회
 
     @Query("SELECT u.email, SUM(u.duration) FROM UsageDataEntity u GROUP BY u.email")
     List<Object[]> findTotalUsageByEmail();

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,9 +26,12 @@ public class UsageDataEntity {
     private double duration; // 사용 시간
 
     // getUpdatedAt() 메서드 추가
-    @Getter
     @Column(name = "updated_at")
     private LocalDateTime updatedAt; // 업데이트 시간 필드 추가
+
+    // 데이터 생성,갱신 조건용 생성날짜
+    @Column(name = "created_at")
+    private LocalDate createdAt;
 
     // 매개변수가 있는 생성자
     public UsageDataEntity(String email, String domain, double duration, LocalDateTime updatedAt) {
