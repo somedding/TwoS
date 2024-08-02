@@ -21,6 +21,6 @@ public class HomeController {
 
     @GetMapping("/todo/community")
     public String community() {
-        return "community";
+        return "community2";
     }
 }
