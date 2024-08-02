@@ -1285,3 +1285,6 @@ SCREEN_TIME_ENTITY [42001-224]
 2024-08-01 14:34:09.251099+09:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SCREEN_TIME_DATA"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
 SCREEN_TIME_DATA [42001-224]
+2024-08-02 15:09:47.290876+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]DAILY_AVERAGE_USAGE"; expected "DELETE, DROP"; SQL statement:
+DAILY_AVERAGE_USAGE [42001-224]
