@@ -23,4 +23,18 @@ public class HomeController {
     public String community() {
         return "community";
     }
+
+    @GetMapping("/todo/data")
+    public String todoData() {
+        return "data";
+    }
+
+    @GetMapping("/unable/community")
+    public String unableCommunity() { return "LoginCommunity"; }
+
+    @GetMapping("/unable/home")
+    public String unableHome() { return "index"; }
+
+    @GetMapping("/unable/data")
+    public String unableData() { return "Logindata"; }
 }

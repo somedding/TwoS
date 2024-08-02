@@ -20,7 +20,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // CSRF(Cross-Site Request Forgery) 보호를 비활성화
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/static/css/**", "/static/web/img/**", "/static/web/js/**", "/static/web/**", "/static/**", "/profile", "/h2-console/**").permitAll() // 모두 접근 가능
+                        .requestMatchers("/", "/static/css/**", "/static/web/img/**", "/static/web/js/**", "/static/web/**", "/static/**", "/static/web/styles/**", "/profile", "/h2-console/**").permitAll() // 모두 접근 가능
                         .requestMatchers("/api/v1/**").hasRole(UserRole.USER.name()) // "/api/v1/**" 패턴의 URL은 USER 권한을 가진 사용자만 접근 가능
                         .anyRequest().authenticated() // 나머지 모든 요청은 인증된 사용자만 접근 가능
                 ) // 요청 URL에 따른 권한을 설정
