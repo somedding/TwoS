@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsService;
 import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsService;
+import test.test_Internet.Sometimes.SomeTimesEntity;
+import test.test_Internet.Sometimes.SomeTimesRepository;
 import test.test_Internet.UsageData.UsageDataEntity;
 import test.test_Internet.UsageData.UsageDataRepository;
 
@@ -16,6 +18,7 @@ import java.util.*;
 
 @Service
 public class UsageStatisticsService {
+
     @Autowired
     private UsageDataRepository usageDataRepository;
 
@@ -27,6 +30,9 @@ public class UsageStatisticsService {
 
     @Autowired
     private MonthlyAverageUsageStatisticsService monthlyAverageUsageStatisticsService;
+
+    @Autowired
+    private SomeTimesRepository someTimesRepository;
 
     public void updateUsageStatistics(String email) {
         double totalUsageTime = calculateTotalUsageTime(email);
@@ -58,7 +64,43 @@ public class UsageStatisticsService {
         // 일별, 월별 평균 사용 시간 계산 후 저장
         dailyAverageUsageStatisticsService.calculateAndSaveDailyAverageUsage();
         monthlyAverageUsageStatisticsService.calculateAndSaveMonthlyAverageUsage();
+
+        // 통계 계산 및 some_times에 데이터 추가
+        calculateAndSaveStatistics(totalUsageTime, email, LocalDateTime.now());
     }
+
+    private void calculateAndSaveStatistics(double averageUsageTime, String email, LocalDateTime createdAt) {
+        double minutes = averageUsageTime / 60;
+
+        // 각 통계 항목에 대해 계산하고 저장
+        saveOrUpdateUsageStatistics("ktxTrips", minutes / 328, email, createdAt);
+        saveOrUpdateUsageStatistics("harryPotterReads", minutes / 2581.3, email, createdAt);
+        saveOrUpdateUsageStatistics("oppenheimerViews", minutes / 180, email, createdAt);
+        saveOrUpdateUsageStatistics("calorieConsumption", minutes * 7.35, email, createdAt);
+        saveOrUpdateUsageStatistics("minimumWage", minutes * 164.3, email, createdAt);
+        saveOrUpdateUsageStatistics("handshakes", minutes * 58.8, email, createdAt);
+    }
+
+    private void saveOrUpdateUsageStatistics(String statType, double value, String email, LocalDateTime createdAt) {
+        // 이메일과 통계 유형으로 기존 엔티티 찾기
+        SomeTimesEntity existingStats = someTimesRepository.findByEmailAndStatType(email, statType);
+
+        if (existingStats != null) {
+            // 기존 데이터가 있으면 업데이트
+            existingStats.setValue(value);
+            existingStats.setCreatedAt(createdAt);
+            someTimesRepository.save(existingStats);
+        } else {
+            // 기존 데이터가 없으면 새로 저장
+            SomeTimesEntity newStats = new SomeTimesEntity();
+            newStats.setEmail(email);
+            newStats.setStatType(statType);
+            newStats.setValue(value);
+            newStats.setCreatedAt(createdAt);
+            someTimesRepository.save(newStats);
+        }
+    }
+
 
     public UsageStatisticsDTO calculateStatistics() {
         UsageStatisticsDTO stats = new UsageStatisticsDTO();
