@@ -18,4 +18,9 @@ public class HomeController {
     public String error() {
         return "index";
     }
+
+    @GetMapping("/todo/community")
+    public String community() {
+        return "community";
+    }
 }
