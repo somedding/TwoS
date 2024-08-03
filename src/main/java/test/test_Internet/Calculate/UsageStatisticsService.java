@@ -2,6 +2,7 @@ package test.test_Internet.Calculate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsService;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UsageStatisticsService {
@@ -68,6 +70,7 @@ public class UsageStatisticsService {
         // 통계 계산 및 some_times에 데이터 추가
         calculateAndSaveStatistics(totalUsageTime, email, LocalDateTime.now());
     }
+
 
     private void calculateAndSaveStatistics(double averageUsageTime, String email, LocalDateTime createdAt) {
         double minutes = averageUsageTime / 60;

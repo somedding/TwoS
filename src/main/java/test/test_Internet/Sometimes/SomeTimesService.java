@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class SomeTimesService {
@@ -29,5 +30,13 @@ public class SomeTimesService {
             newStats.setCreatedAt(createdAt);
             someTimesRepository.save(newStats);
         }
+    }
+
+    public SomeTimesEntity getStatisticsByEmail(String email) {
+        return someTimesRepository.findByEmailAndStatType(email, "UsageStatistics");
+    }
+
+    public List<SomeTimesEntity> getSomeTimesByEmail(String email) {
+        return someTimesRepository.findByEmail(email);
     }
 }
