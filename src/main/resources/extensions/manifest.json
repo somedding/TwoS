@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Internet Usage Tracker",
+  "name": "IFU",
   "version": "1.0",
-  "description": "Tracks and reports internet usage.",
+  "description": "IFU - 이시간에 다른걸 했으면?",
   "permissions": [
     "storage",
     "activeTab",

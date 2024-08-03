@@ -1,0 +1,83 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+body {
+  width: 400px;
+  height: 600px;
+  font-family: 'Pretendard-Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0;
+  padding: 10px;
+  background-color: #40056a;
+  text-align: center;
+  font-family: 'Pretendard-Regular', sans-serif;
+}
+
+h1 .icon {
+  width: 70px;
+  height: 45px;
+   /* 아이콘과 텍스트 사이의 간격 */
+}
+
+#usage-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  border: 1px #a39485 solid;
+  font-size: .9em;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#usage-table th, #usage-table td {
+  border: 1px solid #ddd;
+  padding: 9px;
+  text-align: left;
+  font-family: 'Pretendard-Regular', sans-serif;
+}
+
+#usage-table th {
+  background-color: rgba(129, 45, 142, 0.25);
+}
+
+#reset {
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #812d8e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: 'Pretendard-Regular', sans-serif;
+}
+
+#reset:hover {
+  background-color: #531650; /* 호버 시 배경색 변경 */
+  transform: scale(1.05); /* 호버 시 크기 약간 확대 */
+}
+
+#reset:active {
+  transform: scale(0.95); /* 클릭 시 크기 축소 */
+}
+
+footer {
+  margin-top: auto; /* footer를 맨 아래로 이동 */
+  padding: 10px;
+  background-color: #f1f1f1; /* 배경색 옅은 회색 */
+  color: #888; /* 텍스트 색상 회색 */
+  text-align: center; /* 중앙 정렬 */
+  font-size: 14px; /* 폰트 크기 */
+  font-family: 'Pretendard-Regular', sans-serif; /* footer에도 Pretendard 폰트 적용 */
+}
