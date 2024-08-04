@@ -83,6 +83,8 @@
                             다운로드
                         </a>
                     </div>
+                    <!--test button-->
+                    <!-- <button onclick="dataToJsonUsers()">Users</button> -->
                 </div>
                 <div class="col-lg-5 col-md-6 offset-lg-1">
 
@@ -291,6 +293,31 @@
 <script src="/static/web/js/jquery-3.4.1.min.js"></script>
 <script src="/static/web/js/bootstrap.js"></script>
 <script src="/static/web/js/scripts.js"></script>
+
+<!--test code-->
+<script>
+    function dataToJsonUsers() {
+
+        fetch('/api/data-to-json/userInfo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: ({
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Succeeded!');
+                } else {
+                    alert('Failed.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
 
 </body>
 
