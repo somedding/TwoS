@@ -66,7 +66,7 @@
     </div>
   </header>
 
-  <body class="sub_page">
+  <body class="sub_page"></body>
 
 </div>
 
@@ -91,6 +91,7 @@
             nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
             in reprehenderit in voluptate velit
           </p>
+          <button onclick="addToFriends()">Add to friends</button>
         </div>
       </div>
       <div class="col-md-6">
@@ -166,6 +167,33 @@
 
 <script src="/static/web/js/jquery-3.4.1.min.js"></script>
 <script src="/static/web/js/bootstrap.js"></script>
+
+<!--test code-->
+<script>
+  function addToFriends() {
+    const friendEmail = 'dummy@example.com'; // 더미 친구 이메일
+
+    fetch('/api/friends/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        'friendEmail': friendEmail
+      })
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Friend added successfully!');
+              } else {
+                alert('Failed to add friend.');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+  }
+</script>
 
 </body>
 
