@@ -26,7 +26,7 @@ public class HomeController {
 
     @GetMapping("/todo/data")
     public String todoData() {
-        return "data";
+        return "graph";
     }
 
     @GetMapping("/unable/community")
