@@ -113,7 +113,7 @@ public class DataToJsonService {
 
     // 로그인한 유저 정보 json 변환
     public void exportUserInfoToJsonFile(String filePath) throws IOException {
-        String email = (String) httpSession.getAttribute("uesrEmail");
+        String email = (String) httpSession.getAttribute("userEmail");
         UserEntity users = userRepository.findByemail(email);
 
         File file = saveJsonFile(filePath);
