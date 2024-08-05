@@ -9,7 +9,7 @@ import java.io.IOException;
 @RequestMapping("/api/data-to-json")
 public class DataToJsonController {
 
-    private final String path = "src/main/resources/static/";
+    private final String path = "src/main/resources/static/data/";
 
     @Autowired
     private DataToJsonService dataToJsonService;
@@ -63,6 +63,24 @@ public class DataToJsonController {
     public void exportMonthlyUsageStatistics() throws IOException {
         try {
             dataToJsonService.exportMonthlyAverageUsageToJson(path + "monthlyUsageStatistics.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/someTime")
+    public void exportSomeTime() throws IOException {
+        try {
+            dataToJsonService.exportSomeTimeToJson(path + "someTime.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/screenTime")
+    public void exportScreenTime() throws IOException {
+        try {
+            dataToJsonService.exportScreenTimeToJson(path + "screenTime.json");
         } catch (IOException e) {
             e.printStackTrace();
         }

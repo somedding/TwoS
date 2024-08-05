@@ -7,6 +7,16 @@
  *
  */
 
+// 함수 호출 시 /api/data-to-json/screenTime POST 호출
+function dataToJsonScreenTime() {
+    saveJson('screenTime');
+}
+
+// 함수 호출 시 /api/data-to-json/someTime POST 호출
+function dataToJsonSomeTime() {
+    saveJson('someTime');
+}
+
 // 함수 호출 시 /api/data-to-json/dailyUsageStatistics POST 호출
 function dataToJsonDailyUsageStatistics() {
     saveJson('dailyUsageStatistics');
@@ -37,7 +47,31 @@ function dataToJsonUserInfo() {
     saveJson('userInfo');
 }
 
-// 호출 로직
+function deleteUserInfo() {
+    deleteJson('userInfo');
+}
+
+function deleteUsers() {
+    deleteJson('users');
+}
+
+function deleteUsageStatistics() {
+    deleteJson('usageStatistics');
+}
+
+function deleteUsageData() {
+    deleteJson('usageData');
+}
+
+function deleteSomeTime() {
+    deleteJson('someTime');
+}
+
+function deleteScreenTime() {
+    deleteJson('screenTime');
+}
+
+// 함수 controller 호출 *저장
 function saveJson(filePath) {
     fetch('/api/data-to-json/' + filePath, {
         method: 'POST',
@@ -47,13 +81,21 @@ function saveJson(filePath) {
         body: ({
         })
     })
-        .then(response => {
-            if (response.ok) {
-                alert('Succeeded!');
-            } else {
-                alert('Failed.');
-            }
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// 함수 controller 호출 *삭제
+function deleteJson(filePath) {
+    fetch('/api/delete-json/' + filePath, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: ({
         })
+    })
         .catch(error => {
             console.error('Error:', error);
         });

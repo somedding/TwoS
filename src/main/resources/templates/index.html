@@ -30,7 +30,7 @@
   <link href="/static/web/styles/stylehealthsign.css" rel="stylesheet" />
 </head>
 
-<body>
+<body onload="deleteUserInfo(); deleteUsers(); deleteUsageData(); deleteSomeTime(); deleteScreenTime(); deleteUsageStatistics()">
 
 <div class="hero_area">
   <!-- header section strats -->
@@ -359,6 +359,8 @@
 <script src="/static/web/js/bootstrap.js"></script>
 <script src="/static/web/js/scripts2.js"></script>
 <script src="/static/web/js/healthsign.js"></script>
+
+<script src="/static/web/js/dbToJson.js"></script>
 
 </body>
 
