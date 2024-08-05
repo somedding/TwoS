@@ -39,6 +39,7 @@ function updateContent(data) {
 // totalMinutes를 업데이트하는 함수
 function updateTotalMinutes(minutes) {
     const totalMinutesElement = document.getElementById('totalMinutes');
+    console.log(minutes);
     totalMinutesElement.setAttribute('data-count', minutes);
 
     counter(totalMinutesElement, minutes);
@@ -77,8 +78,9 @@ function createDonutChart(id, percent, color) {
 // 페이지가 로드되면 데이터를 가져와서 차트를 생성하고 내용을 업데이트
 document.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchData();
-    const totalMinutes = await fetchTotalMinutes();
-    updateTotalMinutes(totalMinutes.totalMinutes); // totalMinutes 업데이트
+    const minData = await fetchTotalMinutes();
+
+    updateTotalMinutes(minData[0].totalMinutes / 60); // totalMinutes 업데이트
     createDonutChart('donutChart1', data.percent1, '#3F8BC9'); // 첫 번째 도넛의 색상
     createDonutChart('donutChart2', data.percent2, '#FF5733'); // 두 번째 도넛의 색상
     createDonutChart('donutChart3', data.percent3, '#33FF57'); // 세 번째 도넛의 색상
