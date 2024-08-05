@@ -26,6 +26,8 @@
     <link href="/static/web/styles/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="/static/web/styles/responsive.css" rel="stylesheet" />
+
+    <link href="/static/web/styles/stylehealthsign.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -79,13 +81,10 @@
                         </h1>
                         <h1 id="totalMinutes">123456</h1>
                         <h1> 분 </h1>
-                        <a href="https://drive.google.com/uc?export=download&id=1DFHRTQ3OkfYZSYW3mtYx125TK6u5ptIr" class="">
+                        <a href="" class="">
                             다운로드
                         </a>
-
                     </div>
-                    <!--test button-->
-                     <button onclick="dataToJsonUsageData()">Users</button>
                 </div>
                 <div class="col-lg-5 col-md-6 offset-lg-1">
 
@@ -215,10 +214,35 @@
 <section class="blog_section layout_padding">
     <div class="container">
         <div class="heading_container">
-            <h2>
-                건강알림신호
-            </h2>
-            <img src="/static/web/img/plug.png" alt="">
+            <div class="container1">
+                <button id="delayedButton1" disabled>
+                    <div class="item">
+                        <img src="/static/web/img/Hand Holding Dumbbell.png" alt="스트레칭 아이콘" class="icon">
+                        <div class="text">
+                            <div class="value">0</div>
+                            <div class="label">스트레칭</div>
+                        </div>
+                    </div>
+                </button>
+                <button id="delayedButton2" disabled>
+                    <div class="item">
+                        <img src="/static/web/img/Businessman holding cup.png" alt="수분보충 아이콘" class="icon">
+                        <div class="text">
+                            <div class="value">0</div>
+                            <div class="label">수분보충</div>
+                        </div>
+                    </div>
+                </button>
+                <button id="delayedButton3" disabled>
+                    <div class="item">
+                        <img src="/static/web/img/Open Mind.png" alt="마인드컨트롤 아이콘" class="icon">
+                        <div class="text">
+                            <div class="value">0</div>
+                            <div class="label">마인드컨트롤</div>
+                        </div>
+                    </div>
+                </button>
+            </div>
         </div>
         <div class="row">
         </div>
@@ -294,9 +318,7 @@
 <script src="/static/web/js/jquery-3.4.1.min.js"></script>
 <script src="/static/web/js/bootstrap.js"></script>
 <script src="/static/web/js/scripts.js"></script>
-
-<!--db 데이터 json 파일로 바꾸는 함수들 있는 자바스크립트 파일-->
-<script src="/static/web/js/dbToJson.js"></script>
+<script src="/static/web/js/healthsign.js"></script>
 
 </body>
 

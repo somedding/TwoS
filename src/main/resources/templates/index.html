@@ -26,6 +26,8 @@
   <link href="/static/web/styles/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="/static/web/styles/responsive.css" rel="stylesheet" />
+
+  <link href="/static/web/styles/stylehealthsign.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -50,6 +52,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="/unable/home">Home <span class="sr-only">(current)</span></a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/unable/community">community</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/unable/data">data</a>
+              </li>
               <li class="nav-item active">
                 <button class="nav-link" onclick="location.href='/oauth2/authorization/google'">Log in</button>
               </li>
@@ -73,7 +81,7 @@
             </h1>
             <h1 id="totalMinutes">??????</h1>
             <h1> 분 </h1>
-            <a href="https://drive.google.com/uc?export=download&id=1DFHRTQ3OkfYZSYW3mtYx125TK6u5ptIr" class="">
+            <a href="" class="">
               다운로드
             </a>
           </div>
@@ -246,10 +254,35 @@
 <section class="blog_section layout_padding">
   <div class="container">
     <div class="heading_container">
-      <h2>
-        건강알림신호
-      </h2>
-      <img src="/static/web/img/plug.png" alt="">
+      <div class="container1">
+        <button id="delayedButton1" disabled>
+          <div class="item">
+            <img src="/static/web/img/Hand Holding Dumbbell.png" alt="스트레칭 아이콘" class="icon">
+            <div class="text">
+              <div class="value">???</div>
+              <div class="label">스트레칭</div>
+            </div>
+          </div>
+        </button>
+        <button id="delayedButton2" disabled>
+          <div class="item">
+            <img src="/static/web/img/Businessman holding cup.png" alt="수분보충 아이콘" class="icon">
+            <div class="text">
+              <div class="value">???</div>
+              <div class="label">수분보충</div>
+            </div>
+          </div>
+        </button>
+        <button id="delayedButton3" disabled>
+          <div class="item">
+            <img src="/static/web/img/Open Mind.png" alt="마인드컨트롤 아이콘" class="icon">
+            <div class="text">
+              <div class="value">???</div>
+              <div class="label">마인드컨트롤</div>
+            </div>
+          </div>
+        </button>
+      </div>
     </div>
     <div class="row">
     </div>
@@ -325,6 +358,7 @@
 <script src="/static/web/js/jquery-3.4.1.min.js"></script>
 <script src="/static/web/js/bootstrap.js"></script>
 <script src="/static/web/js/scripts2.js"></script>
+<script src="/static/web/js/healthsign.js"></script>
 
 </body>
 
