@@ -37,4 +37,22 @@ public class FriendManagementService {
         friendManagementRepository.save(entity);
     }
 
+    public void removeFriend(String friendEmail) {
+        String email = (String) httpSession.getAttribute("userEmail");
+        FriendManagementEntity entity = friendManagementRepository.findByUserEmail(email);
+
+        String friendsList = entity.getFriendsList().replace(friendEmail, "").replace(",,", ",");
+
+        if (friendsList.substring(0, 1).contentEquals(",")) {
+            friendsList = friendsList.replaceFirst(",", "");
+        }
+
+        if (friendsList.substring(friendsList.length() - 1, friendsList.length()).contentEquals(",")) {
+            friendsList = friendsList.substring(0, friendsList.length() - 1);
+        }
+
+        entity.setFriendsList(friendsList);
+
+        friendManagementRepository.save(entity);
+    }
 }

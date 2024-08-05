@@ -22,4 +22,7 @@ public class FriendManagementController {
         friendManagementService.addFriend(friendEmail);
     }
 
+    @PostMapping("/remove")
+    public void removeToFriend(@RequestParam String friendEmail) { friendManagementService.removeFriend(friendEmail); }
+
 }
