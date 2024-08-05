@@ -1,6 +1,12 @@
 {
-    "totalMinutes": 5324523,
     "percent1": 55,
     "percent2": 22,
-    "percent3": 33
+    "percent3": 33,
+    "totalMinutes": 120,
+    "minWage": 8590,
+    "roundTrips": 3,
+    "stairsClimbed": 150,
+    "moviesWatched": 5,
+    "harryPotterSeries": 1,
+    "handshakes": 20000
 }

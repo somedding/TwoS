@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "IFU",
   "version": "1.0",
-  "description": "IFU - 이시간에 다른걸 했으면?",
+  "description": "IFU - 이시간에 다른 것을 했으면?",
   "permissions": [
     "storage",
     "activeTab",
