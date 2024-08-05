@@ -168,6 +168,7 @@ async function getUserInfo() {
   });
 }
 
-
+// 테스트용 1초간격 데이터 전송
+// setInterval(sendUsageDataToServer, 1000)
 // 서버에 데이터 전송 간격 설정
-setInterval(sendUsageDataToServer, 20 * 1000);
+setInterval(sendUsageDataToServer, 60 * 1000);

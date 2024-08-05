@@ -24,7 +24,6 @@ public class SecurityConfig {
     public DefaultSecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/", "/static/css/**", "/static/web/img/**", "/static/web/js/**", "/static/web/**", "/static/**", "/static/web/styles/**", "/profile", "/h2-console/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole(UserRole.USER.name())
@@ -45,18 +44,5 @@ public class SecurityConfig {
                 );
 
         return http.build();
-    }
-
-    // CORS 설정을 위한 메소드
-    private CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://localhost:8080")); // 실제 클라이언트의 URL을 입력
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메소드
-        configuration.setAllowedHeaders(List.of("*")); // 허용할 헤더
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 대해 CORS 설정
-        return source;
     }
 }
