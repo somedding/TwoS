@@ -4,6 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import test.test_Internet.Calculate.UsageStatisticsEntity;
+import test.test_Internet.Calculate.UsageStatisticsRepository;
+import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsEntity;
+import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsRepository;
+import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsEntity;
+import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsRepository;
+import test.test_Internet.UsageData.UsageDataEntity;
+import test.test_Internet.UsageData.UsageDataRepository;
 import test.test_Internet.entity.UserEntity;
 import test.test_Internet.repository.UserRepository;
 
@@ -18,6 +26,18 @@ public class DataToJsonService {
     private UserRepository userRepository;
 
     @Autowired
+    private UsageDataRepository usageDataRepository;
+
+    @Autowired
+    private UsageStatisticsRepository usageStatisticsRepository;
+
+    @Autowired
+    private DailyAverageUsageStatisticsRepository dailyAverageUsageStatisticsRepository;
+
+    @Autowired
+    private MonthlyAverageUsageStatisticsRepository monthlyAverageUsageStatisticsRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -27,6 +47,41 @@ public class DataToJsonService {
         this.httpSession = httpSession;
     }
 
+    public void exportDailyAverageUsageToJson(String filePath) throws IOException {
+        List<DailyAverageUsageStatisticsEntity> dailyAverageUsageStatistics = dailyAverageUsageStatisticsRepository.findAll();
+
+        File file = new File(filePath);
+
+        objectMapper.writeValue(file, dailyAverageUsageStatistics);
+    }
+
+    public void exportMonthlyAverageUsageToJson(String filePath) throws IOException {
+        List<MonthlyAverageUsageStatisticsEntity> monthlyAverageUsageStatistics = monthlyAverageUsageStatisticsRepository.findAll();
+
+        File file = new File(filePath);
+
+        objectMapper.writeValue(file, monthlyAverageUsageStatistics);
+    }
+
+    //
+    public void exportUsageStatisticsToJson(String filePath) throws IOException {
+        List<UsageStatisticsEntity> usageStatistics = usageStatisticsRepository.findAll();
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, usageStatistics);
+    }
+
+    // 모든 유저 사용시간 json 변환
+    public void exportUsageDataToJson(String filePath) throws IOException {
+        List<UsageDataEntity> usageData = usageDataRepository.findAll();
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, usageData);
+    }
+
+    // 로그인한 유저 정보 json 변환
     public void exportUserInfoToJsonFile(String filePath) throws IOException {
         String email = (String) httpSession.getAttribute("userEmail");
         UserEntity users = userRepository.findByemail(email);
@@ -36,8 +91,8 @@ public class DataToJsonService {
         objectMapper.writeValue(file, users);
     }
 
+    // 모든 유저 정보 json 변환
     public void exportUsersToJsonFile(String filePath) throws IOException {
-        // 데이터베이스에서 모든 사용자 정보를 가져옵니다.
         List<UserEntity> users = userRepository.findAll();
 
         File file = saveJsonFile(filePath);
