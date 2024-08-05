@@ -15,9 +15,10 @@ const counter = (counterElement, max) => {
     let now = 0;
 
     const handle = setInterval(() => {
-        counterElement.innerHTML = Math.ceil(now).toLocaleString();
+        counterElement.innerHTML = now.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         if (now >= max) {
+            counterElement.innerHTML = max.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             clearInterval(handle);
         }
 
@@ -39,7 +40,6 @@ function updateContent(data) {
 // totalMinutes를 업데이트하는 함수
 function updateTotalMinutes(minutes) {
     const totalMinutesElement = document.getElementById('totalMinutes');
-    console.log(minutes);
     totalMinutesElement.setAttribute('data-count', minutes);
 
     counter(totalMinutesElement, minutes);
