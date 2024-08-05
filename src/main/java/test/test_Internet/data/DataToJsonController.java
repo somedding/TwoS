@@ -86,4 +86,13 @@ public class DataToJsonController {
         }
     }
 
+    @PostMapping("/data")
+    public void exportData() throws IOException {
+        try {
+            dataToJsonService.exportDataToJson(path + "data.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

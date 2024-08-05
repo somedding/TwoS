@@ -21,7 +21,10 @@ import test.test_Internet.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataToJsonService {
@@ -57,6 +60,25 @@ public class DataToJsonService {
         this.httpSession = httpSession;
     }
 
+    public void exportDataToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        List<UsageDataEntity> usageDataEntities = usageDataRepository.findByEmail(email);
+        List<Map> list = new ArrayList<>();
+        Map<String, Double> map = new HashMap<>();
+
+        double n = 0;
+
+        for (int i = 0; i < usageDataEntities.size(); i++) {
+            n += usageDataEntities.get(i).getDuration();
+        }
+
+        map.put("totalMinutes", n);
+        list.add(map);
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, list);
+    }
+
     // 로그인 한 유저의 Screen Time 정보
     public void exportScreenTimeToJson(String filePath) throws IOException {
         String email = (String) httpSession.getAttribute("userEmail");
@@ -75,7 +97,6 @@ public class DataToJsonService {
         File file = saveJsonFile(filePath);
 
         objectMapper.writeValue(file, someTimes);
-
     }
 
     public void exportDailyAverageUsageToJson(String filePath) throws IOException {

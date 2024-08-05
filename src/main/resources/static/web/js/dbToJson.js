@@ -7,6 +7,10 @@
  *
  */
 
+function dataToJsonData() {
+    saveJson('data');
+}
+
 // 함수 호출 시 /api/data-to-json/screenTime POST 호출
 function dataToJsonScreenTime() {
     saveJson('screenTime');
@@ -69,6 +73,10 @@ function deleteSomeTime() {
 
 function deleteScreenTime() {
     deleteJson('screenTime');
+}
+
+function deleteData() {
+    deleteJson('data');
 }
 
 // 함수 controller 호출 *저장

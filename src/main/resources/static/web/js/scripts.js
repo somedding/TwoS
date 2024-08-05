@@ -4,6 +4,12 @@ async function fetchData() {
     return data;
 }
 
+async function fetchTotalMinutes() {
+    const response = await fetch('/static/data/data.json');
+    const data = await response.json();
+    return data;
+}
+
 // 숫자를 카운트업하는 함수
 const counter = (counterElement, max) => {
     let now = 0;
@@ -40,6 +46,7 @@ function updateTotalMinutes(minutes) {
 
 // 데이터 가져와서 업데이트하는 함수 실행
 fetchData().then(updateContent);
+fetchTotalMinutes().then(updateContent);
 
 
 // 도넛 차트를 생성하는 함수
@@ -70,7 +77,8 @@ function createDonutChart(id, percent, color) {
 // 페이지가 로드되면 데이터를 가져와서 차트를 생성하고 내용을 업데이트
 document.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchData();
-    updateTotalMinutes(data.totalMinutes); // totalMinutes 업데이트
+    const totalMinutes = await fetchTotalMinutes();
+    updateTotalMinutes(totalMinutes.totalMinutes); // totalMinutes 업데이트
     createDonutChart('donutChart1', data.percent1, '#3F8BC9'); // 첫 번째 도넛의 색상
     createDonutChart('donutChart2', data.percent2, '#FF5733'); // 두 번째 도넛의 색상
     createDonutChart('donutChart3', data.percent3, '#33FF57'); // 세 번째 도넛의 색상
