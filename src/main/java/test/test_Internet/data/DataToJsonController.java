@@ -32,4 +32,40 @@ public class DataToJsonController {
         }
     }
 
+    @PostMapping("/usageData")
+    public void exportUsageData() throws IOException {
+        try {
+            dataToJsonService.exportUsageDataToJson(path + "usageData.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/usageStatistics")
+    public void exportUsageStatistics() throws IOException {
+        try {
+            dataToJsonService.exportUsageStatisticsToJson(path + "usageStatistics.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/dailyUsageStatistics")
+    public void exportDailyUsageStatistics() throws IOException {
+        try {
+            dataToJsonService.exportDailyAverageUsageToJson(path + "dailyUsageStatistics.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/monthlyUsageStatistics")
+    public void exportMonthlyUsageStatistics() throws IOException {
+        try {
+            dataToJsonService.exportMonthlyAverageUsageToJson(path + "monthlyUsageStatistics.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
