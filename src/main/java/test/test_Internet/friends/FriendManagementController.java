@@ -1,10 +1,7 @@
 package test.test_Internet.friends;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/friends")
@@ -18,11 +15,11 @@ public class FriendManagementController {
     }
 
     @PostMapping("/add")
-    public void addToFriends(@RequestParam String friendEmail) {
+    public void addToFriends(@RequestBody String friendEmail) {
         friendManagementService.addFriend(friendEmail);
     }
 
     @PostMapping("/remove")
-    public void removeToFriend(@RequestParam String friendEmail) { friendManagementService.removeFriend(friendEmail); }
+    public void removeToFriend(@RequestBody String friendEmail) { friendManagementService.removeFriend(friendEmail); }
 
 }

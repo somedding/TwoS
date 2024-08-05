@@ -19,8 +19,27 @@ window.onclick = function(event) {
 }
 
 // 이름 제출
-submitBtn.onclick = function() {
-    var name = document.getElementById("nameInput").value;
-    alert("Hello, " + name + "!");
-    modal.style.display = "none";
+submitBtn.onclick = async function() {
+    var friendEmail = document.getElementById("nameInput").value;
+
+    try {
+        const response = await fetch('/api/friends/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(friendEmail)
+        });
+
+
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            console.log('Success:', jsonResponse);
+            modal.style.display = "none";
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
