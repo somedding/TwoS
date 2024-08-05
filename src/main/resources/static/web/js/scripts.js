@@ -1,8 +1,5 @@
-// scripts.js
-
-// 데이터를 가져오는 함수
 async function fetchData() {
-    const response = await fetch('/static/data.json'); // 데이터가 저장된 파일 또는 API URL
+    const response = await fetch('/static/data/someTime.json'); // 변경된 데이터 파일 또는 API URL
     const data = await response.json();
     return data;
 }
@@ -25,18 +22,11 @@ const counter = (counterElement, max) => {
 
 // 데이터를 HTML에 적용하고 카운트업 효과를 추가하는 함수
 function updateContent(data) {
-    const counters = document.querySelectorAll('.detail-box h5:nth-child(2)');
-    const maxValues = [
-        data.minWage,
-        data.roundTrips,
-        data.stairsClimbed,
-        data.moviesWatched,
-        data.harryPotterSeries,
-        data.handshakes
-    ];
-
-    counters.forEach((counterElement, index) => {
-        setTimeout(() => counter(counterElement, maxValues[index]), 0);
+    data.forEach(item => {
+        const counterElement = document.querySelector(`[data-stat-type="${item.statType}"]`);
+        if (counterElement) {
+            setTimeout(() => counter(counterElement, item.value), 0);
+        }
     });
 }
 
@@ -47,6 +37,10 @@ function updateTotalMinutes(minutes) {
 
     counter(totalMinutesElement, minutes);
 }
+
+// 데이터 가져와서 업데이트하는 함수 실행
+fetchData().then(updateContent);
+
 
 // 도넛 차트를 생성하는 함수
 function createDonutChart(id, percent, color) {
