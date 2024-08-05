@@ -95,4 +95,13 @@ public class DataToJsonController {
         }
     }
 
+    @PostMapping("/friends")
+    public void exportFriends() throws IOException {
+        try {
+            dataToJsonService.exportFriendsListToJson(path + "friends.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

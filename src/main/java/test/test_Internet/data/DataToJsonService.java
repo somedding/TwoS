@@ -17,6 +17,8 @@ import test.test_Internet.Sometimes.SomeTimesRepository;
 import test.test_Internet.UsageData.UsageDataEntity;
 import test.test_Internet.UsageData.UsageDataRepository;
 import test.test_Internet.entity.UserEntity;
+import test.test_Internet.friends.FriendManagementEntity;
+import test.test_Internet.friends.FriendManagementRepository;
 import test.test_Internet.repository.UserRepository;
 
 import java.io.File;
@@ -51,6 +53,9 @@ public class DataToJsonService {
     private ScreenTimeRepository screenTimeRepository;
 
     @Autowired
+    private FriendManagementRepository friendManagementRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -58,6 +63,15 @@ public class DataToJsonService {
 
     public DataToJsonService(HttpSession httpSession) {
         this.httpSession = httpSession;
+    }
+
+    public void exportFriendsListToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        FriendManagementEntity friends = friendManagementRepository.findByUserEmail(email);
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, friends);
     }
 
     public void exportDataToJson(String filePath) throws IOException {
