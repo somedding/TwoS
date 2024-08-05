@@ -1,42 +1,92 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>IFU</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/web/styles/bootstrap.css" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <link href="/static/web/styles/style.css" rel="stylesheet" />
+  <link href="/static/web/styles/responsive.css" rel="stylesheet" />
+  <link href="/static/web/styles/stylehealthsign.css" rel="stylesheet" />
   <link rel="stylesheet" href="/static/web/styles/styles2.css">
   <link rel="stylesheet" href="/static/web/styles/modal.css">
 </head>
-<body onload="dataToJsonFriends()">
-<div class="header">
-  <h2>community</h2>
-  <p>친구를 등록하고<br>친구의 사용량을 확인해보세요</p>
-</div>
-<div class="card-container">
-  <div class="card">
-    <div class="avatar"></div>
-    <p>James</p>
-    <p>123,456,789</p>
-  </div>
-  <div class="card">
-    <div class="avatar"></div>
-    <p>gog</p>
-    <p>2,323</p>
-  </div>
-  <div class="card">
-    <div class="avatar"></div>
-    <p>www</p>
-    <p>456,789</p>
-  </div>
-  <div class="card">
-    <div class="avatar"></div>
-    <p>abc</p>
-    <p>3,456,789</p>
-  </div>
-  <button class="add-card" id="myBtn"></button>
+
+<body onload="dataToJsonFriends(); dataToJsonUserInfo(); dataToJsonUsageData(); dataToJsonUsageStatistics(); dataToJsonSomeTime(); dataToJsonScreenTime(); dataToJsonData()">
+
+<div class="hero_area2">
+  <header class="header_section">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg custom_nav-container">
+        <a class="navbar-brand" href="/sweetodo/todo/todoMain">
+          <img src="/static/web/img/logo.png" alt="" class="logo-img">
+          <span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="s-1"> </span>
+          <span class="s-2"> </span>
+          <span class="s-3"> </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/sweetodo/todo/todoMain">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/todo/community">community</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/todo/data">data</a>
+              </li>
+              <li class="nav-item active">
+                <button class="nav-link" onclick="location.href='/logout'">Log out</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
 </div>
 
-<!-- 모달 -->
+<!-- Wrapper for central alignment -->
+<div class="community-wrapper">
+  <div class="header">
+    <h2>community</h2>
+    <p>친구를 등록하고<br>친구의 사용량을 확인해보세요</p>
+  </div>
+  <div class="card-container">
+    <div class="card">
+      <div class="avatar"></div>
+      <p>James</p>
+      <p>123,456,789</p>
+    </div>
+    <div class="card">
+      <div class="avatar"></div>
+      <p>gog</p>
+      <p>2,323</p>
+    </div>
+    <div class="card">
+      <div class="avatar"></div>
+      <p>www</p>
+      <p>456,789</p>
+    </div>
+    <div class="card">
+      <div class="avatar"></div>
+      <p>abc</p>
+      <p>3,456,789</p>
+    </div>
+    <button class="add-card" id="myBtn"></button>
+  </div>
+</div>
+
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -48,8 +98,21 @@
   </div>
 </div>
 
-<script src="/static/web/js/modal.js"></script>
+<footer class="container-fluid footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-9 mx-auto">
+        <p>
+          &copy;  2024 TWOS Team. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
 
+<script src="/static/web/js/jquery-3.4.1.min.js"></script>
+<script src="/static/web/js/bootstrap.js"></script>
+<script src="/static/web/js/scripts.js"></script>
 <script src="/static/web/js/dbToJson.js"></script>
 
 </body>

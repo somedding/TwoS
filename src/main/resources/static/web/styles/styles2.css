@@ -4,11 +4,27 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
     background-color: #8950c3; /* 보라색 배경 */
     font-family: Arial, sans-serif;
     color: white;
+    height: 100vh;
+}
+
+.hero_area2 {
+    width: 100%;
+}
+
+.header_section {
+    margin-bottom: 0; /* Remove space between navbar and content */
+}
+
+.community-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    width: 100%;
+    flex-grow: 1;
 }
 
 .header {
@@ -51,4 +67,4 @@ body {
 .add-card:before {
     content: '+';
     font-size: 2em;
-} 
+}
