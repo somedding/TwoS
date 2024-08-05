@@ -51,6 +51,26 @@ function deleteUserInfo() {
     deleteJson('userInfo');
 }
 
+function deleteUsers() {
+    deleteJson('users');
+}
+
+function deleteUsageStatistics() {
+    deleteJson('usageStatistics');
+}
+
+function deleteUsageData() {
+    deleteJson('usageData');
+}
+
+function deleteSomeTime() {
+    deleteJson('someTime');
+}
+
+function deleteScreenTime() {
+    deleteJson('screenTime');
+}
+
 // 함수 controller 호출 *저장
 function saveJson(filePath) {
     fetch('/api/data-to-json/' + filePath, {

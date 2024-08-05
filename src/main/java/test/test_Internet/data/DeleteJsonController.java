@@ -19,4 +19,29 @@ public class DeleteJsonController {
         deleteJsonService.deleteFileIfExists(path + "userInfo.json");
     }
 
+    @PostMapping("/users")
+    public void deleteUsers() {
+        deleteJsonService.deleteFileIfExists(path + "users.json");
+    }
+
+    @PostMapping("/screenTime")
+    public void deleteScreenTime() {
+        deleteJsonService.deleteFileIfExists(path + "screenTime.json");
+    }
+
+    @PostMapping("/someTime")
+    public void deleteSomeTime() {
+        deleteJsonService.deleteFileIfExists(path + "someTime.json");
+    }
+
+    @PostMapping("/usageStatistics")
+    public void deleteUsageStatistics() {
+        deleteJsonService.deleteFileIfExists(path + "usageStatistics.json");
+    }
+
+    @PostMapping("/usageData")
+    public void deleteUsageData() {
+        deleteJsonService.deleteFileIfExists(path + "usageData.json");
+    }
+
 }
