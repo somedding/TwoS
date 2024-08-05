@@ -4,9 +4,10 @@ body {
   background-color: white;
 }
 
-.logo {
-  width: 100 px;
-  height: auto;
+
+.logo-img {
+  width: 50px !important;  /* Adjust the width as needed */
+  height: auto !important; /* Maintain the aspect ratio */
 }
 
 /* style.css 파일 */
@@ -24,6 +25,18 @@ body {
 }
 
 /* 추가 스타일 */
+
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-left: 20px; /* Increase left margin as needed */
+}
+
+.navbar .navbar-brand .logo-img {
+  width: 50px;
+  height: auto;
+}
+
 .navbar .nav-link {
   color: #fff; /* 링크 색상 변경 */
 }
