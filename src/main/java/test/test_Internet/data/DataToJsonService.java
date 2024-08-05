@@ -57,6 +57,7 @@ public class DataToJsonService {
         this.httpSession = httpSession;
     }
 
+    // 로그인 한 유저의 Screen Time 정보
     public void exportScreenTimeToJson(String filePath) throws IOException {
         String email = (String) httpSession.getAttribute("userEmail");
         List<ScreenTimeEntity> screenTimeEntities = screenTimeRepository.findByEmail(email);
@@ -66,6 +67,7 @@ public class DataToJsonService {
         objectMapper.writeValue(file, screenTimeEntities);
     }
 
+    // 로그인 한 유저의 Some Time 정보
     public void exportSomeTimeToJson(String filePath) throws IOException {
         String email = (String) httpSession.getAttribute("userEmail");
         List<SomeTimesEntity> someTimes = someTimesRepository.findByEmail(email);
