@@ -34,6 +34,9 @@ public class FriendManagementService {
             }
         }
 
+        String temp = entity.getFriendsList().replaceAll("\"", "");
+        entity.setFriendsList(temp);
+
         friendManagementRepository.save(entity);
     }
 
@@ -43,11 +46,11 @@ public class FriendManagementService {
 
         String friendsList = entity.getFriendsList().replace(friendEmail, "").replace(",,", ",");
 
-        if (friendsList.substring(0, 1).contentEquals(",")) {
-            friendsList = friendsList.replaceFirst(",", "");
+        if (friendsList.startsWith(",")) {
+            friendsList = friendsList.substring(1);
         }
 
-        if (friendsList.substring(friendsList.length() - 1, friendsList.length()).contentEquals(",")) {
+        if (friendsList.endsWith(",")) {
             friendsList = friendsList.substring(0, friendsList.length() - 1);
         }
 
