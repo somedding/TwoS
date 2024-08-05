@@ -33,6 +33,7 @@ public class FriendManagementService {
 
         String temp = friendEmail.replaceAll("\"", "");
 
+        // 내 친구 목록에 친구 정보 추가
         String email = (String) httpSession.getAttribute("userEmail");
         UserEntity tempEntity = userRepository.findByemail(temp);
 
@@ -67,9 +68,30 @@ public class FriendManagementService {
         }
 
         friendManagementRepository.save(entity);
+
+        // 친구의 친구 목록에서 내 정보 추가
+        FriendManagementEntity Fentity = friendManagementRepository.findByUserEmail(temp);
+
+        if (Fentity == null) {
+            Fentity = new FriendManagementEntity();
+            Fentity.setUserEmail(temp);
+            Fentity.setFriendsList(email);
+        } else {
+            String existingFriends = Fentity.getFriendsList();
+            if (existingFriends == null || existingFriends.isEmpty()) {
+                Fentity.setFriendsList(email);
+            } else {
+                // 친구 목록 이메일 콤마(",") 구분
+                Fentity.setFriendsList(existingFriends + "," + email);
+            }
+        }
+
+        friendManagementRepository.save(Fentity);
     }
 
     public void removeFriend(String friendEmail) {
+
+        // 내 친구 목록에서 친구 정보 삭제
         String email = (String) httpSession.getAttribute("userEmail");
         FriendManagementEntity entity = friendManagementRepository.findByUserEmail(email);
 
@@ -86,5 +108,23 @@ public class FriendManagementService {
         entity.setFriendsList(friendsList);
 
         friendManagementRepository.save(entity);
+
+        // 친구의 친구 목록에서 내 정보 삭제
+        FriendManagementEntity entity1 = friendManagementRepository.findByUserEmail(friendEmail);
+
+        String friendsList1 = entity.getFriendsList().replace(email, "").replace(",,", ",");
+
+        if (friendsList1.startsWith(",")) {
+            friendsList1 = friendsList1.substring(1);
+        }
+
+        if (friendsList1.endsWith(",")) {
+            friendsList1 = friendsList1.substring(0, friendsList1.length() - 1);
+        }
+
+        entity.setFriendsList(friendsList1);
+
+        friendManagementRepository.save(entity1);
+
     }
 }
