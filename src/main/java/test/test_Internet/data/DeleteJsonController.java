@@ -44,4 +44,14 @@ public class DeleteJsonController {
         deleteJsonService.deleteFileIfExists(path + "usageData.json");
     }
 
+    @PostMapping("/data")
+    public void deleteData() {
+        deleteJsonService.deleteFileIfExists(path + "data.json");
+    }
+
+    @PostMapping("/friends")
+    public void deleteFriends() {
+        deleteJsonService.deleteFileIfExists(path + "friends.json");
+    }
+
 }

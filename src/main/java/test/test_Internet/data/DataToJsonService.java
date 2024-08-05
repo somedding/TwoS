@@ -17,11 +17,16 @@ import test.test_Internet.Sometimes.SomeTimesRepository;
 import test.test_Internet.UsageData.UsageDataEntity;
 import test.test_Internet.UsageData.UsageDataRepository;
 import test.test_Internet.entity.UserEntity;
+import test.test_Internet.friends.FriendManagementEntity;
+import test.test_Internet.friends.FriendManagementRepository;
 import test.test_Internet.repository.UserRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DataToJsonService {
@@ -48,6 +53,9 @@ public class DataToJsonService {
     private ScreenTimeRepository screenTimeRepository;
 
     @Autowired
+    private FriendManagementRepository friendManagementRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -55,6 +63,34 @@ public class DataToJsonService {
 
     public DataToJsonService(HttpSession httpSession) {
         this.httpSession = httpSession;
+    }
+
+    public void exportFriendsListToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        FriendManagementEntity friends = friendManagementRepository.findByUserEmail(email);
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, friends);
+    }
+
+    public void exportDataToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        List<UsageDataEntity> usageDataEntities = usageDataRepository.findByEmail(email);
+        List<Map> list = new ArrayList<>();
+        Map<String, Double> map = new HashMap<>();
+
+        double n = 0;
+
+        for (int i = 0; i < usageDataEntities.size(); i++) {
+            n += usageDataEntities.get(i).getDuration();
+        }
+
+        map.put("totalMinutes", n);
+        list.add(map);
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, list);
     }
 
     // 로그인 한 유저의 Screen Time 정보
@@ -75,7 +111,6 @@ public class DataToJsonService {
         File file = saveJsonFile(filePath);
 
         objectMapper.writeValue(file, someTimes);
-
     }
 
     public void exportDailyAverageUsageToJson(String filePath) throws IOException {

@@ -30,7 +30,7 @@
     <link href="/static/web/styles/stylehealthsign.css" rel="stylesheet" />
 </head>
 
-<body onload="dataToJsonUserInfo(); dataToJsonUsageData(); dataToJsonUsageStatistics(); dataToJsonSomeTime(); dataToJsonScreenTime()">
+<body onload="dataToJsonUserInfo(); dataToJsonUsageData(); dataToJsonUsageStatistics(); dataToJsonSomeTime(); dataToJsonScreenTime(); dataToJsonData()">
 
 <div class="hero_area">
     <!-- header section strats -->
@@ -81,9 +81,7 @@
                         </h1>
                         <h1 id="totalMinutes">123456</h1>
                         <h1> 분 </h1>
-                        <a href="" class="">
-                            다운로드
-                        </a>
+                        <a href="https://drive.google.com/uc?export=download&id=1_6uSXEB2mBSrlEXaBvU58aUOub_77e33" class="">다운로드</a>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6 offset-lg-1">
@@ -111,7 +109,7 @@
                 </div>
                 <div class="detail-box">
                     <h5>2024년 최저시급 기준</h5>
-                    <h5 class="count">0</h5>
+                    <h5 data-stat-type="minimumWage">0</h5>
                     <h5>원</h5>
                 </div>
             </div>
@@ -121,7 +119,7 @@
                 </div>
                 <div class="detail-box">
                     <h5>서울에서 부산까지</h5>
-                    <h5 class="count">0</h5>
+                    <h5 data-stat-type="ktxTrips">0</h5>
                     <h5>회 왕복</h5>
                 </div>
             </div>
@@ -131,8 +129,8 @@
                 </div>
                 <div class="detail-box">
                     <h5>천국의 계단을 뛰었으면</h5>
-                    <h5 class="count">0</h5>
-                    <h5>회</h5>
+                    <h5 data-stat-type="calorieConsumption">0</h5>
+                    <h5>Kcal</h5>
                 </div>
             </div>
             <div class="box">
@@ -141,7 +139,7 @@
                 </div>
                 <div class="detail-box">
                     <h5>영화</h5>
-                    <h5 class="count">0</h5>
+                    <h5 data-stat-type="oppenheimerViews">0</h5>
                     <h5>회 감상</h5>
                     <p>오펜하이머-2022</p>
                 </div>
@@ -152,7 +150,7 @@
                 </div>
                 <div class="detail-box">
                     <h5>해리포터</h5>
-                    <h5 class="count">0</h5>
+                    <h5 data-stat-type="harryPotterReads">0</h5>
                     <h5>번 정주행</h5>
                 </div>
             </div>
@@ -162,15 +160,13 @@
                 </div>
                 <div class="detail-box">
                     <h5>강호동이 악수를 했다면</h5>
-                    <h5 class="count">0</h5>
+                    <h5 data-stat-type="handshakes">0</h5>
                     <h5>회</h5>
                     <p>강호동은 8시간동안 28,233명과 악수 했다</p>
                 </div>
             </div>
         </div>
-        <a href="">
-            더 확인하기
-        </a>
+
     </div>
 </section>
 <!-- end service section -->
@@ -319,6 +315,7 @@
 <script src="/static/web/js/bootstrap.js"></script>
 <script src="/static/web/js/scripts.js"></script>
 <script src="/static/web/js/healthsign.js"></script>
+<script src="/static/web/js/dbToJson.js"></script>
 
 </body>
 
