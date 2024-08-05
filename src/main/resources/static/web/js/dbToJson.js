@@ -89,6 +89,14 @@ function deleteFriends() {
     deleteJson('friends');
 }
 
+function deleteDailyAverageUsage() {
+    deleteJson('dailyAverageUsage');
+}
+
+function deleteMonthlyAverageUsage() {
+    deleteJson('monthlyAverageUsage');
+}
+
 // 함수 controller 호출 *저장
 function saveJson(filePath) {
     fetch('/api/data-to-json/' + filePath, {
