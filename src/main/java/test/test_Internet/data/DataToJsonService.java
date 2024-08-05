@@ -71,7 +71,14 @@ public class DataToJsonService {
 
         File file = saveJsonFile(filePath);
 
-        objectMapper.writeValue(file, friends);
+        if(friends == null) {
+            Map<String, String> map = new HashMap<>();
+            map.put("friendsList", "");
+            map.put("userEmail", email);
+            objectMapper.writeValue(file, map);
+        } else {
+            objectMapper.writeValue(file, friends);
+        }
     }
 
     public void exportDataToJson(String filePath) throws IOException {
