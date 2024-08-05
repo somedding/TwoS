@@ -11,8 +11,15 @@ body {
 
 /* style.css 파일 */
 .navbar {
+  position: fixed;
+  width: 100%;
   background-color: rgba(151, 96, 187, 0.831);
-  max-width: 2000px; /* Change this value as needed */
+  max-width: 3000px; /* Change this value as needed */
+  margin: 0 auto;
+  left: 50%; /* Centers the navbar horizontally */
+  transform: translateX(-50%); /* Adjusts for the left 50% centering */
+  top: 0; /* Ensures the navbar is fixed at the top */
+  z-index: 1000; /* Keeps the navbar above other content */
   margin: 0 auto;
 }
 
