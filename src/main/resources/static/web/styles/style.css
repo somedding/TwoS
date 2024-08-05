@@ -726,22 +726,25 @@ a:focus {
 .donut-container {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .donut-box {
-  background-color: #D1C4E9; 
+  background-color: #D1C4E9;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  flex-direction: column;
+  width: 22%; /* Adjusted width to fit better with margins */
+  margin: 10px; /* Reduced margin for better spacing */
 }
 
 .donut {
-  width: 80%; 
-  padding-bottom: 80%; 
+  width: 80%;
+  padding-bottom: 80%;
   border-radius: 50%;
   position: relative;
   text-align: center;
@@ -769,4 +772,10 @@ a:focus {
 
 .donut:hover {
   transform: scale(1.1);
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
 }

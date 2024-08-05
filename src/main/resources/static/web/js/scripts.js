@@ -1,5 +1,11 @@
+async function fetchScreenTimeData() {
+    const response = await fetch('/static/data/screenTime.json'); // New function for screenTime data
+    const data = await response.json();
+    return data;
+}
+
 async function fetchData() {
-    const response = await fetch('/static/data/someTime.json'); // 변경된 데이터 파일 또는 API URL
+    const response = await fetch('/static/data/someTime.json'); // Original data function
     const data = await response.json();
     return data;
 }
@@ -10,24 +16,19 @@ async function fetchTotalMinutes() {
     return data;
 }
 
-// 숫자를 카운트업하는 함수
 const counter = (counterElement, max) => {
     let now = 0;
-
     const handle = setInterval(() => {
         counterElement.innerHTML = now.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
         if (now >= max) {
             counterElement.innerHTML = max.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             clearInterval(handle);
         }
-
         const step = (max - now) / 10;
         now += step;
     }, 50);
 };
 
-// 데이터를 HTML에 적용하고 카운트업 효과를 추가하는 함수
 function updateContent(data) {
     data.forEach(item => {
         const counterElement = document.querySelector(`[data-stat-type="${item.statType}"]`);
@@ -37,20 +38,15 @@ function updateContent(data) {
     });
 }
 
-// totalMinutes를 업데이트하는 함수
 function updateTotalMinutes(minutes) {
     const totalMinutesElement = document.getElementById('totalMinutes');
     totalMinutesElement.setAttribute('data-count', minutes);
-
     counter(totalMinutesElement, minutes);
 }
 
-// 데이터 가져와서 업데이트하는 함수 실행
 fetchData().then(updateContent);
 fetchTotalMinutes().then(updateContent);
 
-
-// 도넛 차트를 생성하는 함수
 function createDonutChart(id, percent, color) {
     const donut = document.getElementById(id);
     donut.dataset.percent = percent;
@@ -59,7 +55,7 @@ function createDonutChart(id, percent, color) {
         let currentPercent = 0;
         const interval = setInterval(() => {
             if (currentPercent <= percent) {
-                donut.style.background = `conic-gradient(${color} 0% ${currentPercent}%, #F2F2F2 ${currentPercent}% 100%)`;
+                donut.style.background = `conic-gradient(#${color} 0% ${currentPercent}%, #F2F2F2 ${currentPercent}% 100%)`;
                 donut.dataset.percent = currentPercent;
                 currentPercent++;
             } else {
@@ -68,21 +64,24 @@ function createDonutChart(id, percent, color) {
         }, 10);
     };
 
-    // 초기에 애니메이션 실행
     animateDonut();
-
-    // 호버 이벤트 리스너 추가
     donut.addEventListener('mouseenter', animateDonut);
 }
 
-// 페이지가 로드되면 데이터를 가져와서 차트를 생성하고 내용을 업데이트
 document.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchData();
     const minData = await fetchTotalMinutes();
+    const screenTimeData = await fetchScreenTimeData();
 
-    updateTotalMinutes(minData[0].totalMinutes / 60); // totalMinutes 업데이트
-    createDonutChart('donutChart1', data.percent1, '#3F8BC9'); // 첫 번째 도넛의 색상
-    createDonutChart('donutChart2', data.percent2, '#FF5733'); // 두 번째 도넛의 색상
-    createDonutChart('donutChart3', data.percent3, '#33FF57'); // 세 번째 도넛의 색상
-    updateContent(data); // HTML 내용 업데이트 및 카운트업 효과 추가
+    const videoData = screenTimeData.find(item => item.category === 'Video');
+    const searchData = screenTimeData.find(item => item.category === 'Search');
+    const mediaData = screenTimeData.find(item => item.category === 'Media');
+    const etcData = screenTimeData.find(item => item.category === 'etc');
+
+    updateTotalMinutes(minData[0].totalMinutes / 60);
+    createDonutChart('donutChart1', videoData.percentage, 'c9b3d8');
+    createDonutChart('donutChart2', searchData.percentage, 'f6cadc');
+    createDonutChart('donutChart3', mediaData.percentage, 'f2b3cb');
+    createDonutChart('donutChart4', etcData.percentage, 'c0dffb');
+    updateContent(data);
 });
