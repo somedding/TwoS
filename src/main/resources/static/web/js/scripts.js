@@ -85,3 +85,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     createDonutChart('donutChart4', etcData.percentage, 'c0dffb');
     updateContent(data);
 });
+
