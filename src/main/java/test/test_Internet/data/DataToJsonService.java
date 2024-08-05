@@ -10,6 +10,8 @@ import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsEntity;
 import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsRepository;
 import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsEntity;
 import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsRepository;
+import test.test_Internet.Sometimes.SomeTimesEntity;
+import test.test_Internet.Sometimes.SomeTimesRepository;
 import test.test_Internet.UsageData.UsageDataEntity;
 import test.test_Internet.UsageData.UsageDataRepository;
 import test.test_Internet.entity.UserEntity;
@@ -38,6 +40,9 @@ public class DataToJsonService {
     private MonthlyAverageUsageStatisticsRepository monthlyAverageUsageStatisticsRepository;
 
     @Autowired
+    private SomeTimesRepository someTimesRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -47,10 +52,22 @@ public class DataToJsonService {
         this.httpSession = httpSession;
     }
 
+    public void exportSomeTimeToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        List<SomeTimesEntity> someTimes = someTimesRepository.findByEmail(email);
+
+        System.out.println(someTimes + " / " + email);
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, someTimes);
+
+    }
+
     public void exportDailyAverageUsageToJson(String filePath) throws IOException {
         List<DailyAverageUsageStatisticsEntity> dailyAverageUsageStatistics = dailyAverageUsageStatisticsRepository.findAll();
 
-        File file = new File(filePath);
+        File file = saveJsonFile(filePath);
 
         objectMapper.writeValue(file, dailyAverageUsageStatistics);
     }
@@ -58,7 +75,7 @@ public class DataToJsonService {
     public void exportMonthlyAverageUsageToJson(String filePath) throws IOException {
         List<MonthlyAverageUsageStatisticsEntity> monthlyAverageUsageStatistics = monthlyAverageUsageStatisticsRepository.findAll();
 
-        File file = new File(filePath);
+        File file = saveJsonFile(filePath);
 
         objectMapper.writeValue(file, monthlyAverageUsageStatistics);
     }
@@ -72,9 +89,10 @@ public class DataToJsonService {
         objectMapper.writeValue(file, usageStatistics);
     }
 
-    // 모든 유저 사용시간 json 변환
+    // 로그인한 유저 사용시간 json 변환
     public void exportUsageDataToJson(String filePath) throws IOException {
-        List<UsageDataEntity> usageData = usageDataRepository.findAll();
+        String email = (String) httpSession.getAttribute("userEmail");
+        List<UsageDataEntity> usageData = usageDataRepository.findByEmail(email);
 
         File file = saveJsonFile(filePath);
 
@@ -83,7 +101,7 @@ public class DataToJsonService {
 
     // 로그인한 유저 정보 json 변환
     public void exportUserInfoToJsonFile(String filePath) throws IOException {
-        String email = (String) httpSession.getAttribute("userEmail");
+        String email = (String) httpSession.getAttribute("uesrEmail");
         UserEntity users = userRepository.findByemail(email);
 
         File file = saveJsonFile(filePath);
