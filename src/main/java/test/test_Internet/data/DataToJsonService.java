@@ -10,6 +10,8 @@ import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsEntity;
 import test.test_Internet.Calculate.daliy.DailyAverageUsageStatisticsRepository;
 import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsEntity;
 import test.test_Internet.Calculate.monthly.MonthlyAverageUsageStatisticsRepository;
+import test.test_Internet.ScreenTime.ScreenTimeEntity;
+import test.test_Internet.ScreenTime.ScreenTimeRepository;
 import test.test_Internet.Sometimes.SomeTimesEntity;
 import test.test_Internet.Sometimes.SomeTimesRepository;
 import test.test_Internet.UsageData.UsageDataEntity;
@@ -43,6 +45,9 @@ public class DataToJsonService {
     private SomeTimesRepository someTimesRepository;
 
     @Autowired
+    private ScreenTimeRepository screenTimeRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
@@ -52,11 +57,18 @@ public class DataToJsonService {
         this.httpSession = httpSession;
     }
 
+    public void exportScreenTimeToJson(String filePath) throws IOException {
+        String email = (String) httpSession.getAttribute("userEmail");
+        List<ScreenTimeEntity> screenTimeEntities = screenTimeRepository.findByEmail(email);
+
+        File file = saveJsonFile(filePath);
+
+        objectMapper.writeValue(file, screenTimeEntities);
+    }
+
     public void exportSomeTimeToJson(String filePath) throws IOException {
         String email = (String) httpSession.getAttribute("userEmail");
         List<SomeTimesEntity> someTimes = someTimesRepository.findByEmail(email);
-
-        System.out.println(someTimes + " / " + email);
 
         File file = saveJsonFile(filePath);
 

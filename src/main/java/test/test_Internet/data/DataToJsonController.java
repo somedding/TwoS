@@ -77,4 +77,13 @@ public class DataToJsonController {
         }
     }
 
+    @PostMapping("/screenTime")
+    public void exportScreenTime() throws IOException {
+        try {
+            dataToJsonService.exportScreenTimeToJson(path + "screenTime.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
