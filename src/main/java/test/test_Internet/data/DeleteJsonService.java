@@ -15,9 +15,6 @@ public class DeleteJsonService {
         try {
             if (Files.exists(path)) {
                 Files.delete(path);
-                System.out.println("Deleted file: " + path);
-            } else {
-                System.out.println("File does not exist: " + path);
             }
         } catch (IOException e) {
             System.err.println("An error occurred while deleting the file: " + e.getMessage());
