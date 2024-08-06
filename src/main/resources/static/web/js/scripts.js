@@ -4,6 +4,18 @@ function getEmailFromUrl() {
     return params.get('email');
 }
 
+async function resetJsonData() {
+    try {
+        const response = await fetch('/reset-json', { method: 'POST' });
+        if (!response.ok) {
+            throw new Error('JSON 파일 초기화 실패');
+        }
+        console.log(await response.text());
+    } catch (error) {
+        console.error('Error resetting JSON data:', error);
+    }
+}
+
 // JSON 파일에서 사용자 데이터를 불러오는 함수
 async function fetchUserData(email) {
     try {
@@ -96,7 +108,9 @@ function createDonutChart(id, percent, color) {
 
 // DOMContentLoaded 이벤트 리스너
 document.addEventListener('DOMContentLoaded', async () => {
+    await resetJsonData(); // JSON 데이터 초기화
     const allData = await fetchAllData(); // 사용자 데이터 가져오기
+
     if (!allData) {
         console.error('사용자 데이터를 가져오는 데 문제가 발생했습니다.');
         return; // 데이터가 없으면 종료

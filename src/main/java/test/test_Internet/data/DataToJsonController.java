@@ -3,6 +3,7 @@ package test.test_Internet.data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.IOException;
 import jakarta.servlet.http.HttpSession;
 
@@ -41,12 +42,19 @@ public class DataToJsonController {
         String fileName = "all_" + email;
         String jsonFilePath = path + fileName + ".json";
 
+        // 기존 JSON 파일 삭제
+        File jsonFile = new File(jsonFilePath);
+        if (jsonFile.exists()) {
+            if (!jsonFile.delete()) {
+                throw new IOException("Failed to delete existing JSON file: " + jsonFilePath);
+            }
+        }
+
         try {
             dataToJsonService.exportAllDataToJson(jsonFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 /*
     @PostMapping("/users")
     public void exportUsers() throws IOException {
@@ -138,4 +146,5 @@ public class DataToJsonController {
         }
     }
 */
+    }
 }
