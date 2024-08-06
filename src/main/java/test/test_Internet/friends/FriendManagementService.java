@@ -37,6 +37,8 @@ public class FriendManagementService {
         String email = (String) httpSession.getAttribute("userEmail");
         UserEntity tempEntity = userRepository.findByemail(temp);
 
+        FriendManagementEntity entity = friendManagementRepository.findByUserEmail(email);
+
         if (!Pattern.matches(EMAIL_REGEX, temp)) {
             // 친구추가 거부 반응 만들기 1
             System.out.println("올바른 이메일 형식이 아닙니다. : " + temp);
@@ -49,9 +51,13 @@ public class FriendManagementService {
             // 친구추가 거부 반응 만들기 3
             System.out.println("존재하지 않는 유저입니다. : " + temp);
             return;
+        } else if (entity.getFriendsList().contains(temp)) {
+            // 친구추가 거부 반응 만들기 4
+            System.out.println("이미 친구추가가 된 유저입니다. : " + temp);
+            return;
         }
 
-        FriendManagementEntity entity = friendManagementRepository.findByUserEmail(email);
+
 
         if (entity == null) {
             entity = new FriendManagementEntity();
