@@ -20,6 +20,16 @@ async function fetchUserData(email) {
     }
 }
 
+// 이메일을 포함한 URL로 리다이렉트하는 함수
+function redirectWithEmail(url) {
+    const email = getEmailFromUrl();
+    if (email) {
+        window.location.href = `${url}?email=${email}`;
+    } else {
+        window.location.href = url;
+    }
+}
+
 // 모든 데이터를 불러오는 함수
 async function fetchAllData() {
     const email = getEmailFromUrl(); // URL에서 이메일 추출
