@@ -85,15 +85,15 @@ setInterval(() => {
 }, 1000);
 
 // 데이터 초기화 및 서버 전송
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'reset') {
-    usageData = {};
-    chrome.storage.local.set({ usageData: {} }, () => {
-      sendResponse({ status: 'reset' });
-    });
-    return true;
-  }
-});
+// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//   if (request.action === 'reset') {
+//     usageData = {};
+//     chrome.storage.local.set({ usageData: {} }, () => {
+//       sendResponse({ status: 'reset' });
+//     });
+//     return true;
+//   }
+// });
 
 // 사용자의 활동 시간을 서버에 전송하는 함수
 async function sendUsageDataToServer() {
@@ -107,7 +107,7 @@ async function sendUsageDataToServer() {
   };
 
   try {
-    const response = await fetch('http://twos.gay:808//api/usage/upload', {
+    const response = await fetch('http://localhost:8080/api/usage/upload', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
