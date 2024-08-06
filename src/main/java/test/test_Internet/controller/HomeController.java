@@ -2,39 +2,62 @@ package test.test_Internet.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 @Controller
 public class HomeController {
+
     @GetMapping("/sweetodo/todo/todoMain")
-    public String home() {
-        return "main";
+    public String home(@RequestParam(required = false) String email) {
+        String redirectUrl = "main";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
     }
 
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public String index(@RequestParam(required = false) String email) {
+        String redirectUrl = "index";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
     }
 
     @GetMapping("/error")
-    public String error() {
-        return "index";
+    public String error(@RequestParam(required = false) String email) {
+        String redirectUrl = "index";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
     }
 
     @GetMapping("/todo/community")
-    public String community() {
-        return "community";
+    public String community(@RequestParam(required = false) String email) {
+        String redirectUrl = "community";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
     }
 
     @GetMapping("/todo/data")
-    public String todoData() {
-        return "graph";
+    public String todoData(@RequestParam(required = false) String email) {
+        String redirectUrl = "graph";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
     }
 
-    @GetMapping("/unable/community")
-    public String unableCommunity() { return "LoginCommunity"; }
-
     @GetMapping("/unable/home")
-    public String unableHome() { return "index"; }
-
-    @GetMapping("/unable/data")
-    public String unableData() { return "Logindata"; }
+    public String unableHome(@RequestParam(required = false) String email) {
+        String redirectUrl = "index";
+        if (email != null) {
+            redirectUrl += "?email=" + email; // 이메일 파라미터 추가
+        }
+        return redirectUrl;
+    }
 }

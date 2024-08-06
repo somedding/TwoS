@@ -107,7 +107,7 @@ async function sendUsageDataToServer() {
   };
 
   try {
-    const response = await fetch('http://localhost:8080/api/usage/upload', {
+    const response = await fetch('http://twos.gay:808//api/usage/upload', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
