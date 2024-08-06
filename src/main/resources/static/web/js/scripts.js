@@ -31,6 +31,7 @@ async function fetchAllData() {
     return await fetchUserData(email); // 사용자 데이터 반환
 }
 
+// 카운터 함수
 const counter = (counterElement, max) => {
     let now = 0;
     const handle = setInterval(() => {
@@ -44,6 +45,7 @@ const counter = (counterElement, max) => {
     }, 50);
 };
 
+// 콘텐츠 업데이트 함수
 function updateContent(data) {
     data.forEach(item => {
         const counterElement = document.querySelector(`[data-stat-type="${item.statType}"]`);
@@ -53,12 +55,14 @@ function updateContent(data) {
     });
 }
 
+// 총 분 업데이트 함수
 function updateTotalMinutes(minutes) {
     const totalMinutesElement = document.getElementById('totalMinutes');
     totalMinutesElement.setAttribute('data-count', minutes);
     counter(totalMinutesElement, minutes);
 }
 
+// 도넛 차트 생성 함수
 function createDonutChart(id, percent, color) {
     const donut = document.getElementById(id);
     donut.dataset.percent = percent;
@@ -80,6 +84,7 @@ function createDonutChart(id, percent, color) {
     donut.addEventListener('mouseenter', animateDonut);
 }
 
+// DOMContentLoaded 이벤트 리스너
 document.addEventListener('DOMContentLoaded', async () => {
     const allData = await fetchAllData(); // 사용자 데이터 가져오기
     if (!allData) {
