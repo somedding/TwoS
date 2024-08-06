@@ -3,6 +3,8 @@ package test.test_Internet.friends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/friends")
 public class FriendManagementController {
@@ -20,5 +22,8 @@ public class FriendManagementController {
     }
 
     @PostMapping("/remove")
-    public void removeToFriend(@RequestBody String friendEmail) { friendManagementService.removeFriend(friendEmail); }
+    public void removeToFriend(@RequestBody Map<String, String> payload) {
+        String friendEmail = payload.get("email");
+        friendManagementService.removeFriend(friendEmail);
+    }
 }

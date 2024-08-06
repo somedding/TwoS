@@ -1,15 +1,21 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const cardContainer = document.getElementById('cardContainer');
     const addButton = document.getElementById('myBtn');
+    const userEmail = 'leeys2413@gmail.com'; // 실제 로그인한 사용자의 이메일을 얻는 로직으로 대체
 
-    async function fetchAllData() {
+    async function fetchAllData(email) {
         try {
-            const response = await fetch('/static/data/all.json');
+            const fileName = `/static/data/all_${email}.json`;
+            const response = await fetch(fileName);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
             console.log('All Data:', data);
             return data;
         } catch (error) {
             console.error('Error fetching all data:', error);
+            return null; // 에러 발생 시 null 반환
         }
     }
 
@@ -33,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(friendEmail)
+                body: JSON.stringify({ email: friendEmail }) // friendEmail을 JSON 객체로 전달
             });
 
             if (response.ok) {
@@ -47,8 +53,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
+
     async function createFriendCards() {
-        const allData = await fetchAllData();
+        const allData = await fetchAllData(userEmail);
         console.log('All data:', allData);
 
         if (allData) {
