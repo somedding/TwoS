@@ -38,7 +38,6 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
-                        .defaultSuccessUrl("/sweetodo/todo/todoMain")
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                                 .userService(customOAuth2UserService)
                         )
@@ -56,23 +55,20 @@ public class SecurityConfig {
     public LogoutSuccessHandler logoutSuccessHandler() {
         return (request, response, authentication) -> {
             // JSON 파일 삭제 로직
-            DeleteJsonService deleteJsonService = new DeleteJsonService();
-            String path = "src/main/resources/static/data/";
-
-            deleteJsonService.deleteFileIfExists(path + "userInfo.json");
-            deleteJsonService.deleteFileIfExists(path + "users.json");
-            deleteJsonService.deleteFileIfExists(path + "screenTime.json");
-            deleteJsonService.deleteFileIfExists(path + "someTime.json");
-            deleteJsonService.deleteFileIfExists(path + "usageStatistics.json");
-            deleteJsonService.deleteFileIfExists(path + "usageData.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/userInfo.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/users.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/screenTime.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/someTime.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/usageStatistics.json");
+            deleteJsonService.deleteFileIfExists("src/main/resources/static/data/usageData.json");
 
             response.sendRedirect("/"); // 로그아웃 후 리다이렉트할 URL
         };
     }
-
 
     @Bean
     public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 }
+

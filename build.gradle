@@ -39,11 +39,9 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
 	// Database Dependencies
-	runtimeOnly 'com.mysql:mysql-connector-j'	// MySQL JDBC driver
-	runtimeOnly 'com.h2database:h2'				// H2 database for development
-
-	// Development Tools
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.mysql:mysql-connector-j' // MySQL JDBC driver
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:2.7.4' // MariaDB JDBC driver 추가
+	runtimeOnly 'com.h2database:h2' // H2 database for development
 
 	// Lombok for code generation
 	compileOnly 'org.projectlombok:lombok'
