@@ -51,13 +51,11 @@ public class FriendManagementService {
             // 친구추가 거부 반응 만들기 3
             System.out.println("존재하지 않는 유저입니다. : " + temp);
             return;
-        } else if (entity.getFriendsList().contains(temp)) {
+        } else if (entity != null && entity.getFriendsList().contains(temp)) {
             // 친구추가 거부 반응 만들기 4
             System.out.println("이미 친구추가가 된 유저입니다. : " + temp);
             return;
         }
-
-
 
         if (entity == null) {
             entity = new FriendManagementEntity();
