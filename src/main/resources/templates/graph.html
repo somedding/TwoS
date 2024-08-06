@@ -36,132 +36,58 @@
 <div class="hero_area">
   <!-- header section strats -->
   <header class="header_section">
-
-      <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand" href="/sweetodo/todo/todoMain">
-          <img src="/static/web/img/logo.png" alt="" class="logo-img">
-          <span></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="s-1"> </span>
-          <span class="s-2"> </span>
-          <span class="s-3"> </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/sweetodo/todo/todoMain')">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/todo/community')">Community</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/todo/data')">Data</a>
-              </li>
-              <li class="nav-item active">
-                <button class="nav-link" onclick="location.href='/logout'">Log out</button>
-              </li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg custom_nav-container">
+      <a class="navbar-brand" href="javascript:void(0)" onclick="redirectWithEmail('/sweetodo/todo/todoMain')">
+        <img src="/static/web/img/logo.png" alt="" class="logo-img">
+        <span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="s-1"> </span>
+        <span class="s-2"> </span>
+        <span class="s-3"> </span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/sweetodo/todo/todoMain')">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/todo/community')">Community</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="javascript:void(0)" onclick="redirectWithEmail('/todo/data')">Data</a>
+            </li>
+            <li class="nav-item active">
+              <button class="nav-link" onclick="location.href='/logout'">Log out</button>
+            </li>
+          </ul>
         </div>
-      </nav>
-
+      </div>
+    </nav>
   </header>
 
   <section class="about_section layout_padding">
-  <div class="container">
-    <div class="profile">
-      <img class="avatar" data-type="avatar" />
-      <div class="name" data-type="name">홍길동</div>
+    <canvas id="line-chart" width="800" height="450"></canvas>
+  </section>
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <div class="col-lg-7 col-md-9 mx-auto">
+      <p>&copy; 2024 TWOS Team. All rights reserved.</p>
     </div>
-    <div class="stats">
-      <div class="overview">
-        <h1 id="totalMinutes">123456</h1>
-        <h1>M</h1>
-        <p>지난 주 보다 0 M 증가하였습니다.</p>
-      </div>
-      <div class="graph">
-        <div class="graph-header">
-          <h3>Graph</h3>
-          <div class="timeframe-box">
-            <div class="buttons-container">
-              <button id="showChart1">1D</button>
-              <button id="showChart2">7D</button>
-              <button id="showChart3">1M</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="charts-container">
-          <div id="chart1Container" class="donut-box">
-            <canvas id="myChart1"></canvas>
-          </div>
-          <div id="chart2Container" class="donut-box hidden">
-            <canvas id="myChart2"></canvas>
-          </div>
-          <div id="chart3Container" class="donut-box hidden">
-            <canvas id="myChart3"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sidebar">
-      <div class="users-box">
-        <div class="users">
-          <div class="user active">
-            <img class="dot" data-type="avatar" />
-            <div>Me</div>
-          </div>
-          <div class="user">
-            <div class="dot"></div>
-            <div>James</div>
-          </div>
-          <div class="user">
-            <div class="dot"></div>
-            <div>Modani</div>
-          </div>
-          <div class="user">
-            <div class="dot"></div>
-            <div>Hanni</div>
-          </div>
-          <div class="user">
-            <div class="dot"></div>
-            <div>Pam</div>
-          </div>
-        </div>
-        <div class="add-user">
-          <span>+</span>
-        </div>
-      </div>
-    </div>
-  </div>
-    </section>
-
-  <!-- Load data.js before script.js -->
-
-
-<!-- footer section -->
-<footer class="container-fluid footer_section">
-
-      <div class="col-lg-7 col-md-9 mx-auto">
-        <p>
-          &copy;  2024 TWOS Team. All rights reserved.
-        </p>
-
-
-  </div>
-</footer>
-<!-- footer section -->
+  </footer>
+  <!-- footer section -->
 
   <script src="/static/web/js/data.js"></script>
-  <script src="/static/web/js/script.js"></script>
   <script src="/static/web/js/information.js"></script>
-<script src="/static/web/js/jquery-3.4.1.min.js"></script>
-<script src="/static/web/js/bootstrap.js"></script>
-<script src="/static/web/js/scripts.js"></script>
-<script src="/static/web/js/dbToJson.js"></script>
-
+  <script src="/static/web/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/web/js/bootstrap.js"></script>
+  <script src="/static/web/js/scripts.js"></script>
+  <script src="/static/web/js/dbToJson.js"></script>
+  <script src="/static/web/js/graphfuncjava.js"></script>
+  <!-- Add the new JavaScript file -->
+  <script src="/static/web/js/updateChart.js"></script>
+</div>
 </body>
-
 </html>
