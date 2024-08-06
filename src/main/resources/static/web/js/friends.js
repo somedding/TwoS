@@ -1,7 +1,11 @@
+
 document.addEventListener('DOMContentLoaded', async function() {
     const cardContainer = document.getElementById('cardContainer');
     const addButton = document.getElementById('myBtn');
-    const userEmail = 'leeys2413@gmail.com'; // 실제 로그인한 사용자의 이메일을 얻는 로직으로 대체
+
+    // 주소창에서 email 파라미터 값 가져오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const userEmail = urlParams.get('email'); // 로그인한 사용자의 이메일
 
     async function fetchAllData(email) {
         try {
@@ -53,8 +57,12 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
-
     async function createFriendCards() {
+        if (!userEmail) {
+            console.error('Error: Missing user email in URL parameters.');
+            return;
+        }
+
         const allData = await fetchAllData(userEmail);
         console.log('All data:', allData);
 
