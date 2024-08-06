@@ -94,7 +94,6 @@ public class FriendManagementService {
     }
 
     public void removeFriend(String friendEmail) {
-
         String temp = friendEmail.replaceAll("\"", "");
 
         // 내 친구 목록에서 친구 정보 삭제
@@ -131,6 +130,6 @@ public class FriendManagementService {
         entity1.setFriendsList(friendsList1);
 
         friendManagementRepository.save(entity1);
-
     }
+
 }
