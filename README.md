@@ -23,7 +23,7 @@
 
 ## 프론트엔드
 ```
-김성진(somedding)
+김성진(somedding) - 크롬익스텐션
 이상호(leesanghoit)
 박종민(E1UCI)
 ```
