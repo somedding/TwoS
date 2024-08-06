@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async function() {
     const cardContainer = document.getElementById('cardContainer');
     const addButton = document.getElementById('myBtn');
@@ -25,15 +24,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     function calculateTotalUsage(email, usageData) {
         const userUsageData = usageData.filter(data => data.email.trim() === email.trim());
-        console.log(`Filtered usage data for ${email}:`, userUsageData);
-
         const totalDurationInSeconds = userUsageData.reduce((sum, data) => sum + data.duration, 0);
-        console.log(`Total duration for ${email} in seconds: ${totalDurationInSeconds}`);
-
-        const totalDurationInMinutes = (Math.round((totalDurationInSeconds / 60) * 100) / 100).toFixed(2);
-        console.log(`Total duration for ${email} in minutes: ${totalDurationInMinutes}`);
-
-        return totalDurationInMinutes;
+        return (Math.round((totalDurationInSeconds / 60) * 100) / 100).toFixed(2);
     }
 
     async function removeFriend(friendEmail) {
@@ -48,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             if (response.ok) {
                 console.log(`Friend ${friendEmail} removed successfully`);
-                await createFriendCards();
+                await createFriendCards(); // 친구 카드를 새로 고침
             } else {
                 console.error('Error removing friend:', response.statusText);
             }
@@ -71,71 +63,64 @@ document.addEventListener('DOMContentLoaded', async function() {
             const users = allData.allUsers;
             const usageData = allData.usageData;
 
-            cardContainer.innerHTML = '';
+            cardContainer.innerHTML = ''; // 기존 카드 초기화
 
             if (friendsList && friendsList.trim()) {
                 const friendsArray = friendsList.split(',');
-                console.log('Friends array:', friendsArray);
-
                 friendsArray.forEach(friendEmail => {
-                    console.log(`Processing friend with email: ${friendEmail.trim()}`);
-
                     const user = users.find(user => user.email.trim() === friendEmail.trim());
-                    console.log('User found:', user);
+                    if (user) {
+                        const friendName = user.name;
+                        const friendPicture = user.picture;
+                        const totalUsage = calculateTotalUsage(friendEmail, usageData);
 
-                    if (!user) {
-                        console.error(`No user found for email: ${friendEmail.trim()}`);
-                        return;
-                    }
+                        const card = document.createElement('div');
+                        card.className = 'card';
 
-                    const friendName = user.name;
-                    const friendPicture = user.picture;
-
-                    const totalUsage = calculateTotalUsage(friendEmail, usageData);
-                    console.log(`Total usage for ${friendEmail.trim()}: ${totalUsage}`);
-
-                    const card = document.createElement('div');
-                    card.className = 'card';
-
-                    const avatar = document.createElement('div');
-                    avatar.className = 'avatar';
-                    if (friendPicture) {
-                        avatar.style.backgroundImage = `url(${friendPicture})`;
-                        avatar.style.backgroundSize = 'cover';
-                        avatar.style.backgroundPosition = 'center';
-                    }
-
-                    const name = document.createElement('p');
-                    name.textContent = friendName;
-
-                    const usage = document.createElement('p');
-                    usage.textContent = `${totalUsage} min`;
-
-                    const removeButton = document.createElement('button');
-                    removeButton.className = 'remove-button';
-                    removeButton.textContent = 'x';
-                    removeButton.onclick = function() {
-                        if (confirm(`Are you sure you want to remove ${friendName}?`)) {
-                            removeFriend(friendEmail.trim());
+                        const avatar = document.createElement('div');
+                        avatar.className = 'avatar';
+                        if (friendPicture) {
+                            avatar.style.backgroundImage = `url(${friendPicture})`;
+                            avatar.style.backgroundSize = 'cover';
+                            avatar.style.backgroundPosition = 'center';
                         }
-                    };
 
-                    card.appendChild(avatar);
-                    card.appendChild(name);
-                    card.appendChild(usage);
-                    card.appendChild(removeButton);
+                        const name = document.createElement('p');
+                        name.textContent = friendName;
 
-                    cardContainer.appendChild(card);
+                        const usage = document.createElement('p');
+                        usage.textContent = `${totalUsage} min`;
+
+                        const removeButton = document.createElement('button');
+                        removeButton.className = 'remove-button';
+                        removeButton.textContent = 'x';
+                        removeButton.onclick = function() {
+                            if (confirm(`Are you sure you want to remove ${friendName}?`)) {
+                                removeFriend(friendEmail.trim());
+                            }
+                        };
+
+                        card.appendChild(avatar);
+                        card.appendChild(name);
+                        card.appendChild(usage);
+                        card.appendChild(removeButton);
+
+                        cardContainer.appendChild(card);
+                    } else {
+                        console.error(`No user found for email: ${friendEmail.trim()}`);
+                    }
                 });
             }
 
-            cardContainer.appendChild(addButton);
+            cardContainer.appendChild(addButton); // 추가 버튼 추가
         } else {
             console.error('Error: Missing data from all.json.');
         }
     }
 
+    // 페이지가 로드될 때마다 친구 카드 생성
     createFriendCards();
 
+    // 새로고침 시에도 카드 생성
     window.createFriendCards = createFriendCards;
 });
